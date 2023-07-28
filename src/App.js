@@ -32,7 +32,7 @@ function MyChart() {
       <CartesianGrid />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="value" stroke="#8884d8">
+      <Line type="monotone" dataKey="value" stroke="#8884d8" />
     </LineChart>
   )
 }
