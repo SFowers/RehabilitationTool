@@ -1,51 +1,22 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const RehabilitationChart = ({ exerciseData, normativeData }) => {
+const RehabilitationChart = ({ patientData, normativeData }) => {
   return (
-    <LineChart width={800} height={400}>
+    <LineChart width={800} height={400} data={patientData}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="timeDate" />
+      <XAxis dataKey="dateTime" />
       <YAxis />
       <Tooltip />
       <Legend />
-      {/* Render lines for each exercise type */}
-      {exerciseData.map((exercise, index) => (
-        <Line
-          key={index}
-          data={exercise.data}
-          type="monotone"
-          dataKey="reps"
-          stroke={getLineColor(exercise.name)}
-          name={exercise.name}
-        />
-      ))}
+      {/* Each exercise type will have a unique color */}
+      <Line type="monotone" dataKey="handWaves" stroke="#8884d8" name="Hand Waves" />
+      <Line type="monotone" dataKey="acrossTable" stroke="#82ca9d" name="Across Table" />
+      <Line type="monotone" dataKey="raiseArm" stroke="#ffc658" name="Raise Arm" />
       {/* Add a line for normative data */}
-      <Line
-        type="monotone"
-        data={normativeData}
-        dataKey="normative"
-        stroke="#000000"
-        name="Normative"
-      />
+      <Line type="monotone" dataKey="normative" stroke="#000000" name="Normative" />
     </LineChart>
   );
 };
 
 export default RehabilitationChart;
-
-// Helper function to get the line color for each exercise
-function getLineColor(exerciseName) {
-  // Colors can be customized based on exerciseName if needed
-  // For simplicity, this function returns a fixed color for each exercise
-  switch (exerciseName) {
-    case "handWaves":
-      return "#8884d8";
-    case "acrossTable":
-      return "#82ca9d";
-    case "raiseArm":
-      return "#ffc658";
-    default:
-      return "#000000";
-  }
-}
